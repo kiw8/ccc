@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Connection Configuration</title>
+</head>
+<body>
+    <h1>Database Connection Details</h1>
+    <p>The following configuration is used to connect to the MySQL database:</p>
+    <pre>
+        Server Address: 121.177.12.204
+        Username: root
+        Password: 1234
+        Database Name: kal
+    </pre>
+
+    <p>This connection script is written in PHP:</p>
+    <pre>
+        &lt;?php
+        $servername = "121.177.12.204"; // MySQL 서버 주소
+        $username = "root"; // 사용자 이름
+        $password = "1234"; // 비밀번호
+        $dbname = "kal"; // 데이터베이스 이름
+
+        // MySQL 연결 생성
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        // 연결 확인
+        if ($conn->connect_error) {
+            die("Database connection failed: " . $conn->connect_error);
+        }
+        ?&gt;
+    </pre>
+
+    <p>Ensure that the server is running and the credentials are accurate.</p>
+</body>
+</html>

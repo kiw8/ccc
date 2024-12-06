@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Goal API Documentation</title>
+</head>
+<body>
+    <h1>Calorie Goal API Documentation</h1>
+
+    <h2>1. Get Calorie Goal</h2>
+    <p>This function retrieves the daily calorie goal for a specific user based on their ID.</p>
+    <pre>
+        Function Name: getCalorieGoal($userId)
+        Method: SELECT
+        Parameters:
+            - userId (integer): The ID of the user
+        Returns:
+            - JSON response with daily_calorie_goal or an error message
+    </pre>
+    <p>Example Response:</p>
+    <pre>
+        {
+            "daily_calorie_goal": 2000
+        }
+    </pre>
+
+    <h2>2. Update Calorie Goal</h2>
+    <p>This function updates the daily calorie goal for a specific user.</p>
+    <pre>
+        Function Name: updateCalorieGoal($userId, $daily_calorie_goal)
+        Method: UPDATE
+        Parameters:
+            - userId (integer): The ID of the user
+            - daily_calorie_goal (integer): The new daily calorie goal
+        Returns:
+            - JSON response with success or error message
+    </pre>
+    <p>Example Response:</p>
+    <pre>
+        {
+            "message": "Calorie goal updated successfully"
+        }
+    </pre>
+
+    <h2>Database Queries</h2>
+    <h3>Get Calorie Goal</h3>
+    <pre>
+        SELECT daily_calorie_goal
+        FROM user
+        WHERE id = ?;
+    </pre>
+
+    <h3>Update Calorie Goal</h3>
+    <pre>
+        UPDATE user
+        SET daily_calorie_goal = ?
+        WHERE id = ?;
+    </pre>
+</body>
+</html>

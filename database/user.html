@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management API Documentation</title>
+</head>
+<body>
+    <h1>User Management API Documentation</h1>
+    <p>This document provides an overview of the user management API, including endpoints for user registration, retrieval, update, and deletion.</p>
+
+    <h2>Endpoints</h2>
+
+    <h3>1. Check Existing User</h3>
+    <p><strong>Function:</strong> <code>checkExistingUser($username)</code></p>
+    <p><strong>Description:</strong> Checks if a user with the given username already exists in the database.</p>
+    <pre>
+    Request:
+    {
+        "username": "john_doe"
+    }
+
+    Response:
+    true  (User exists)
+    false (User does not exist)
+    </pre>
+
+    <h3>2. Register User</h3>
+    <p><strong>Function:</strong> <code>registerUser($username, $password, $nickname, $daily_calorie_goal)</code></p>
+    <p><strong>Description:</strong> Registers a new user with the provided information.</p>
+    <pre>
+    Request:
+    {
+        "username": "john_doe",
+        "password": "securePassword",
+        "nickname": "John",
+        "daily_calorie_goal": 2000
+    }
+
+    Response:
+    {
+        "success": true,
+        "message": "User registered successfully"
+    }
+    OR
+    {
+        "success": false,
+        "message": "Error message here"
+    }
+    </pre>
+
+    <h3>3. Get All Users</h3>
+    <p><strong>Function:</strong> <code>getAllUsers()</code></p>
+    <p><strong>Description:</strong> Retrieves a list of all registered users.</p>
+    <pre>
+    Response:
+    {
+        "success": true,
+        "data": [
+            {
+                "id": 1,
+                "username": "john_doe",
+                "nickname": "John",
+                "daily_calorie_goal": 2000,
+                "created_at": "2023-12-01 10:00:00"
+            },
+            {
+                "id": 2,
+                "username": "jane_doe",
+                "nickname": "Jane",
+                "daily_calorie_goal": 1800,
+                "created_at": "2023-12-02 11:00:00"
+            }
+        ]
+    }
+    OR
+    {
+        "success": false,
+        "message": "No users found"
+    }
+    </pre>
+
+    <h3>4. Get User by ID</h3>
+    <p><strong>Function:</strong> <code>getUserById($userId)</code></p>
+    <p><strong>Description:</strong> Retrieves information for a specific user by their ID.</p>
+    <pre>
+    Request:
+    {
+        "userId": 1
+    }
+
+    Response:
+    {
+        "success": true,
+        "data": {
+            "id": 1,
+            "username": "john_doe",
+            "nickname": "John",
+            "daily_calorie_goal": 2000,
+            "created_at": "2023-12-01 10:00:00"
+        }
+    }
+    OR
+    {
+        "success": false,
+        "message": "User not found"
+    }
+    </pre>
+
+    <h3>5. Delete User</h3>
+    <p><strong>Function:</strong> <code>deleteUser($userId)</code></p>
+    <p><strong>Description:</strong> Deletes a user by their ID.</p>
+    <pre>
+    Request:
+    {
+        "userId": 1
+    }
+
+    Response:
+    {
+        "success": true,
+        "message": "User deleted successfully"
+    }
+    OR
+    {
+        "success": false,
+        "message": "Error message here"
+    }
+    </pre>
+
+    <h3>6. Update User</h3>
+    <p><strong>Function:</strong> <code>updateUser($userId, $nickname, $daily_calorie_goal)</code></p>
+    <p><strong>Description:</strong> Updates the nickname and daily calorie goal for a specific user.</p>
+    <pre>
+    Request:
+    {
+        "userId": 1,
+        "nickname": "Johnny",
+        "daily_calorie_goal": 2500
+    }
+
+    Response:
+    {
+        "success": true,
+        "message": "User updated successfully"
+    }
+    OR
+    {
+        "success": false,
+        "message": "Error message here"
+    }
+    </pre>
+
+    <h2>Error Handling</h2>
+    <p>Common errors include:</p>
+    <ul>
+        <li><strong>Missing Parameters:</strong> Ensure all required parameters are provided.</li>
+        <li><strong>User Not Found:</strong> Attempting to retrieve or delete a non-existent user.</li>
+        <li><strong>Database Errors:</strong> Check server logs for detailed error messages.</li>
+    </ul>
+</body>
+</html>

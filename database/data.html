@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation</title>
+</head>
+<body>
+    <h1>API Documentation</h1>
+    <p>This document describes the endpoints available in the API for user management, calorie goals, and meal records.</p>
+
+    <h2>Endpoints</h2>
+
+    <!-- Register User -->
+    <h3>1. Register User</h3>
+    <p><strong>Endpoint:</strong> <code>/api?action=register</code></p>
+    <p><strong>Method:</strong> POST</p>
+    <p><strong>Description:</strong> Registers a new user with the provided information.</p>
+    <pre>
+        Request Body (JSON):
+        {
+            "username": "john_doe",
+            "password": "password123",
+            "nickname": "John",
+            "daily_calorie_goal": 2000
+        }
+
+        Response (JSON):
+        {
+            "message": "User registered successfully",
+            "user_id": 1
+        }
+    </pre>
+
+    <!-- Get Users -->
+    <h3>2. Get Users</h3>
+    <p><strong>Endpoint:</strong> <code>/api?action=getUsers</code></p>
+    <p><strong>Method:</strong> GET</p>
+    <p><strong>Description:</strong> Retrieves a list of all users.</p>
+    <pre>
+        Response (JSON):
+        [
+            {
+                "user_id": 1,
+                "username": "john_doe",
+                "nickname": "John",
+                "daily_calorie_goal": 2000
+            },
+            {
+                "user_id": 2,
+                "username": "jane_doe",
+                "nickname": "Jane",
+                "daily_calorie_goal": 1800
+            }
+        ]
+    </pre>
+
+    <!-- Get Calorie Goal -->
+    <h3>3. Get Calorie Goal</h3>
+    <p><strong>Endpoint:</strong> <code>/api?action=getCalorieGoal&user_id=1</code></p>
+    <p><strong>Method:</strong> GET</p>
+    <p><strong>Description:</strong> Retrieves the calorie goal for a specific user.</p>
+    <pre>
+        Response (JSON):
+        {
+            "daily_calorie_goal": 2000
+        }
+    </pre>
+
+    <!-- Update Calorie Goal -->
+    <h3>4. Update Calorie Goal</h3>
+    <p><strong>Endpoint:</strong> <code>/api?action=updateCalorieGoal&user_id=1</code></p>
+    <p><strong>Method:</strong> PUT</p>
+    <p><strong>Description:</strong> Updates the calorie goal for a specific user.</p>
+    <pre>
+        Request Body (JSON):
+        {
+            "daily_calorie_goal": 2500
+        }
+
+        Response (JSON):
+        {
+            "message": "Calorie goal updated successfully"
+        }
+    </pre>
+
+    <!-- Add Meal -->
+    <h3>5. Add Meal</h3>
+    <p><strong>Endpoint:</strong> <code>/api?action=addMeal</code></p>
+    <p><strong>Method:</strong> POST</p>
+    <p><strong>Description:</strong> Adds a meal record for a user.</p>
+    <pre>
+        Request Body (JSON):
+        {
+            "user_id": 1,
+            "food_name": "Apple",
+            "food_image": "apple.jpg",
+            "record_date": "2023-12-01",
+            "calories": 95
+        }
+
+        Response (JSON):
+        {
+            "message": "Meal record added successfully"
+        }
+    </pre>
+
+    <!-- Get Meals -->
+    <h3>6. Get Meals</h3>
+    <p><strong>Endpoint:</strong> <code>/api?action=getMeals&user_id=1</code></p>
+    <p><strong>Method:</strong> GET</p>
+    <p><strong>Description:</strong> Retrieves all meal records for a specific user.</p>
+    <pre>
+        Response (JSON):
+        [
+            {
+                "food_name": "Apple",
+                "record_date": "2023-12-01",
+                "calories": 95
+            },
+            {
+                "food_name": "Banana",
+                "record_date": "2023-12-02",
+                "calories": 105
+            }
+        ]
+    </pre>
+
+    <!-- Get Meals by Date -->
+    <h3>7. Get Meals by Date</h3>
+    <p><strong>Endpoint:</strong> <code>/api?action=getMealsByDate&date=2023-12-01</code></p>
+    <p><strong>Method:</strong> GET</p>
+    <p><strong>Description:</strong> Retrieves all meal records for a specific date.</p>
+    <pre>
+        Response (JSON):
+        [
+            {
+                "food_name": "Apple",
+                "record_date": "2023-12-01",
+                "calories": 95
+            }
+        ]
+    </pre>
+
+    <h2>Error Responses</h2>
+    <pre>
+        {
+            "error": "Invalid action"
+        }
+
+        {
+            "error": "Missing required fields."
+        }
+    </pre>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Records API Documentation</title>
+</head>
+<body>
+    <h1>Meal Records API Documentation</h1>
+    <p>This document describes the endpoints and processes for managing meal records, including adding new records and calculating remaining calories.</p>
+
+    <h2>1. Add Meal Record</h2>
+    <p><strong>Endpoint:</strong> <code>/api/meal_records.html</code></p>
+    <p><strong>Method:</strong> POST</p>
+    <p><strong>Action:</strong> <code>addMeal</code></p>
+    <p><strong>Description:</strong> Adds a new meal record for a specific user and calculates remaining calories.</p>
+
+    <h3>Request Body (JSON)</h3>
+    <pre>
+    {
+        "action": "addMeal",
+        "user_id": 1,
+        "food_name": "Apple",
+        "record_date": "2023-12-01"
+    }
+    </pre>
+
+    <h3>Response (JSON)</h3>
+    <pre>
+    Success:
+    {
+        "message": "Meal record added successfully.",
+        "recordId": 123,
+        "remainingCalories": 1500
+    }
+
+    Error:
+    {
+        "error": "해당 음식이 데이터베이스에 없습니다."
+    }
+    </pre>
+
+    <h2>2. Remaining Calories Calculation</h2>
+    <p><strong>Description:</strong> The remaining calories are calculated by subtracting the total calories consumed from the user's goal calories.</p>
+
+    <h3>Logic:</h3>
+    <ol>
+        <li>Retrieve the user's goal calories from the <code>users</code> table.</li>
+        <li>Sum up the calories from all meal records for the user in the <code>meal_records</code> table.</li>
+        <li>Subtract the total calories consumed from the goal calories.</li>
+    </ol>
+
+    <h3>SQL Queries Used</h3>
+    <pre>
+    // Get goal calories for a user
+    SELECT goal_calories FROM users WHERE id = ?;
+
+    // Calculate total calories consumed
+    SELECT SUM(calories) as total_calories FROM meal_records WHERE user_id = ?;
+    </pre>
+
+    <h2>Error Handling</h2>
+    <p>The following errors may occur:</p>
+    <ul>
+        <li><strong>Missing Fields:</strong> If required fields like <code>user_id</code>, <code>food_name</code>, or <code>record_date</code> are not provided.</li>
+        <li><strong>Food Not Found:</strong> If the food name does not exist in the <code>food_search</code> table.</li>
+        <li><strong>Database Errors:</strong> If the database operation fails.</li>
+    </ul>
+
+    <h3>Example Error Response</h3>
+    <pre>
+    {
+        "error": "해당 음식이 데이터베이스에 없습니다."
+    }
+    </pre>
+</body>
+</html>
